@@ -4,12 +4,11 @@ from recommendation_system import *
 app = Flask(__name__)
 
 
-@app.route('/upload', methods=['GET', 'POST'])
+@app.route('/upload', methods=['POST'])
 def upload_file_get():
     if request.method == 'POST':
-        user_id = request.json["data"]["data"]["id"]
-        user_budget = int(request.json["data"]["data"]["budget"])
-        return jsonify(get_user_trip(user_id, user_budget))
+        user_id = request.json["userId"]
+        return jsonify(get_user_trip(user_id))
 
 
 @app.route("/")

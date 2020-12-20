@@ -19,7 +19,13 @@ def recommend(item_id, num,results,ds,user_budget):
     return trip_price, recommend_activites
 
 
-def get_user_trip(user_id, user_budget):
+def get_user_trip(user_id_post):
+    custom_url = 'https://hack-maldives.herokuapp.com/api/v1/users/all/' + user_id_post
+    res = requests.get(custom_url)
+    json = res.json()
+    user_id = json["data"]["data"]["id"]
+    user_budget = int(json["data"]["data"]["budget"])*10
+
     res = requests.get('https://hack-maldives.herokuapp.com/api/v1/activitites/all')
     data = res.json()
     df = pd.json_normalize(data["data"]["data"])
