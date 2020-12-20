@@ -73,15 +73,15 @@ def get_user_trip(user_id_post):
     cash_tour = []
     recommendation_tour = []
     for id in my_activiti_id:
-        cash, recommendation = recommend(item_id=id, num=10,results=results,ds=ds,user_budget=user_budget)
+        cash, recommendation = recommend(item_id=id, num=5,results=results,ds=ds,user_budget=user_budget)
         cash_tour.append(cash)
-        recommendation_tour.append(recommendation)
+        recommendation_tour = recommendation_tour + recommendation
 
     tour = []
-    for id in recommendation_tour[0]:
+    for id in recommendation_tour:
         for i, dates in enumerate(data["data"]["data"]):
             if (dates["id"] == id):
                 tour.append(dates)
 
-    response = {"status": "success", "results": 95, "data": {"data": tour} }
+    response = {"status": "success", "results": 95, "data": {"data": tour}}
     return response
