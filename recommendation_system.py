@@ -77,5 +77,11 @@ def get_user_trip(user_id_post):
         cash_tour.append(cash)
         recommendation_tour.append(recommendation)
 
-    response = {'cash_tour': cash_tour, 'recommendation_tour': recommendation_tour}
+    tour = []
+    for id in recommendation_tour[0]:
+        for i, dates in enumerate(data["data"]["data"]):
+            if (dates["id"] == id):
+                tour.append(dates)
+
+    response = {"status": "success", "results": 95, "data": {"data": tour} }
     return response
